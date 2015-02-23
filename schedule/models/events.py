@@ -35,7 +35,7 @@ class Event(models.Model):
     start = models.DateTimeField(_("start"))
     end = models.DateTimeField(_("end"), help_text=_("The end time must be later than the start time."))
     title = models.CharField(_("title"), max_length=255)
-    description = models.TextField(_("description"), null=True, blank=True)
+    #description = models.TextField(_("description"), null=True, blank=True)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, verbose_name=_("creator"),
                                 related_name='creator')
     created_on = models.DateTimeField(_("created on"), auto_now_add=True)
@@ -350,7 +350,7 @@ class EventRelation(models.Model):
 class Occurrence(models.Model):
     event = models.ForeignKey(Event, verbose_name=_("event"))
     title = models.CharField(_("title"), max_length=255, blank=True, null=True)
-    description = models.TextField(_("description"), blank=True, null=True)
+    #description = models.TextField(_("description"), blank=True, null=True)
     start = models.DateTimeField(_("start"))
     end = models.DateTimeField(_("end"))
     cancelled = models.BooleanField(_("cancelled"), default=False)
@@ -368,8 +368,8 @@ class Occurrence(models.Model):
         super(Occurrence, self).__init__(*args, **kwargs)
         if self.title is None and self.event_id:
             self.title = self.event.title
-        if self.description is None and self.event_id:
-            self.description = self.event.description
+#        if self.description is None and self.event_id:
+#            self.description = self.event.description
 
     def moved(self):
         return self.original_start != self.start or self.original_end != self.end

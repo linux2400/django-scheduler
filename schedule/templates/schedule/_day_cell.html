@@ -7,16 +7,16 @@
   {% else %}
     <td class="{{size}} daynumber free">
 {% endif %}
+<a href="{% url "day_calendar" calendar.slug %}{% querystring_for_date day.start 3 True %}">
     <div class="header">
-        <a href="{% url "day_calendar" calendar.slug %}{% querystring_for_date day.start 3 True %}">
             <b>{{day.start.day}}</b>
-        </a>
     </div>
+    </a>
     {% ifnotequal size "small" %}
         <div class="daycell">
             {% if day.has_occurrences %}
                 {% for o in day.get_occurrence_partials %}
-                        <div class="eventcell eventcell{{o.class}}{% if o.occurrence.cancelled %} cancelled{% endif %}" 
+                        <div class="eventcell eventcell{{o.class}}{% if o.occurrence.cancelled %} cancelled{% endif %}"
                             href="#{% hash_occurrence o.occurrence %}" onclick="openDetail(this);">
                             <div class="starttime">
                                 {% ifequal o.class 0 %}{{ o.occurrence.start|time:"G:i" }}{% endifequal %}
