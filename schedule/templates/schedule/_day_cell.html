@@ -7,7 +7,7 @@
   {% else %}
     <td class="{{size}} daynumber free">
 {% endif %}
-<a href="{% url "day_calendar" calendar.slug %}{% querystring_for_date day.start 3 True %}">
+<a href="javascript:update_calendar('{% url "catalog:calendar-data" pk=calendar.pk size="regular" period="day" %}{% querystring_for_date day.start 3 True %}')">
     <div class="header">
             <b>{{day.start.day}}</b>
     </div>
